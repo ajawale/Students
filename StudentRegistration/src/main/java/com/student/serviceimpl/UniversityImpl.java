@@ -69,7 +69,6 @@ public class UniversityImpl implements Univ {
 	public void deleteStudent(Student std) {
 		 studentDao.delete(std.getRno());;
 	}
-	
 	 
 	public void updateStudent(Integer cno, Integer rno) {
 		studentDao.updateStudent(cno, rno);

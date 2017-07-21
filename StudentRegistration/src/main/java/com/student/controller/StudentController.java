@@ -18,27 +18,46 @@ import com.student.models.Student;
 import com.student.models.University;
 import com.student.serviceimpl.UniversityImpl;
 
+/**
+ * @author anup.jawale
+ *
+ */
 @RestController
 public class StudentController {
 	@Autowired
 	UniversityImpl universityImpl;
 	
-	 @GetMapping("/university")
+	
+	 /**
+	 * @return
+	 * Return University data
+	 */
+	@GetMapping("/university")
 	    public List<University> getMovies(){
 	        return universityImpl.getUniversityList();
 	    }
 	 
-	 @GetMapping("/courses")
+	 /**
+	 * @return Avilable Courses
+	 */
+	@GetMapping("/courses")
 	 public List<Course> getCourses(){
 		return universityImpl.getCourses();
 	 }
 	 
-	 @GetMapping("/students")
+	 /**
+	 * @return Students
+	 */
+	@GetMapping("/students")
 	 public List<Student> getStudents(){
 		 return universityImpl.getStudents();
 	 }
 	 
-	 @PostMapping("/students")
+	 /**
+	 * @param std
+	 *  Insert new the student
+	 */
+	@PostMapping("/students")
 	 public ResponseEntity<Student> addStudent(@RequestBody Student std){
 		 Student student =   universityImpl.addStudent(std);
 		 if(student != null)
@@ -48,7 +67,11 @@ public class StudentController {
 		 
 	 }
 	 
-	 @PostMapping("/courses")
+	 /**
+	 * @param course
+	 *  Inserts New Courses
+	 */
+	@PostMapping("/courses")
 	 public ResponseEntity<Course> addCourses(@RequestBody Course course){
 		 Course cour =   universityImpl.addCourse(course);
 		 if(course != null)
@@ -58,14 +81,24 @@ public class StudentController {
 		 
 	 }
 	 
-	 @DeleteMapping("/students")
+	 /**
+	 * @param std
+	 * @return
+	 * Delete the student from db
+	 */
+	@DeleteMapping("/students")
 	 public ResponseEntity<Integer> deleteStudent(@RequestBody Student std){
 		 universityImpl.deleteStudent(std);
 		 return new ResponseEntity<>(std.getRno(), HttpStatus.OK);
 		
 	 }
 	 
-	 @PutMapping("/register")
+	 /**
+	 * @param std
+	 * @return
+	 * Register the student for the course
+	 */
+	@PutMapping("/register")
 	 public ResponseEntity<Student> registerStudent(@RequestBody Student std){
 		 universityImpl.updateStudent(std.getCno(),std.getRno());
 		 return new ResponseEntity<>(std, HttpStatus.OK);
