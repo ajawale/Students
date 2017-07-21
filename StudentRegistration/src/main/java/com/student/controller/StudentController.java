@@ -24,6 +24,7 @@ import com.student.serviceimpl.UniversityImpl;
  */
 @RestController
 public class StudentController {
+	
 	@Autowired
 	UniversityImpl universityImpl;
 	
@@ -33,7 +34,7 @@ public class StudentController {
 	 * Return University data
 	 */
 	@GetMapping("/university")
-	    public List<University> getMovies(){
+	    public List<University> getUniversites(){
 	        return universityImpl.getUniversityList();
 	    }
 	 
