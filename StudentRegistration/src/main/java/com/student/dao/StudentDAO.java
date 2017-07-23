@@ -1,5 +1,7 @@
 package com.student.dao;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -11,9 +13,10 @@ import com.student.models.Student;
 @Repository
 public interface StudentDAO extends CrudRepository<Student, Integer> {
 	
-	  // Native Query Language
-	@Modifying	
-	 @Query(value = "update STUDENT set CNO=?1 where RNO=?2", nativeQuery = true)
-      public void updateStudent(@Param("CNO") Integer cno,@Param("RNO") Integer rno);
+	// Native Query Language
+	@Modifying
+	@Transactional
+	@Query(value = "update STUDENT set CNO=?1 where RNO=?2", nativeQuery = true)
+	public void updateStudent(@Param("CNO") Integer cno, @Param("RNO") Integer rno);
 
 }

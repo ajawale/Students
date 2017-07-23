@@ -1,8 +1,15 @@
 package com.student.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Student {
@@ -11,8 +18,11 @@ public class Student {
 	private int rno;
 	@Column(name="NAME")
 	private String name;
-	@Column(name="CNO")
-	private int cno;
+	@ManyToMany(cascade = {CascadeType.ALL})
+	@JoinTable(name="STUDENT_COURSE", 
+	joinColumns={@JoinColumn(name="RNO")}, 
+	inverseJoinColumns={@JoinColumn(name="CNO")})
+	private Set<Course> courses = new HashSet<Course>();
 	
 	public int getRno() {
 		return rno;
@@ -27,11 +37,14 @@ public class Student {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getCno() {
-		return cno;
+
+	public Set<Course> getCourses() {
+		return courses;
 	}
-	public void setCno(int cno) {
-		this.cno = cno;
+
+	public void setCourses(Set<Course> courses) {
+		this.courses = courses;
 	}
+	
 	
 }

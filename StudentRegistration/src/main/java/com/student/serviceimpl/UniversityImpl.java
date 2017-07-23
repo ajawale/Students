@@ -2,11 +2,12 @@ package com.student.serviceimpl;
 
 
 import java.lang.reflect.Type;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -70,9 +71,14 @@ public class UniversityImpl implements Univ {
 		 studentDao.delete(std.getRno());;
 	}
 	 
-	public void updateStudent(Integer cno, Integer rno) {
-		studentDao.updateStudent(cno, rno);
-		
+	public void registerSudent(int rno, int cno) {
+		Student std = studentDao.findOne(rno);
+		if(std != null){
+			Set<Course> courseSet = new HashSet<>();
+			courseSet.add(courseDao.findOne(cno));
+			std.setCourses(courseSet);
+		}
+		studentDao.save(std);
 	}
 
 }
