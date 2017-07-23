@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -99,10 +98,24 @@ public class StudentController {
 	 * @return
 	 * Register the student for the course
 	 */
-	@PutMapping("/register")
+	@PostMapping("/register")
 	 public ResponseEntity<Student> registerStudent( @RequestParam("rno") Integer rno, @RequestParam("cno") Integer cno){
 		 universityImpl.registerSudent(rno,cno);
 		 return new ResponseEntity<>(HttpStatus.OK);
 	 }
+	
+	/**
+	 * @param rno
+	 * @param cno
+	 * @return
+	 * Remove the student and course mapping from Student_Courses table
+	 */
+	@DeleteMapping("/register")
+	 public ResponseEntity<Student> unregisterSudent( @RequestParam("rno") Integer rno, @RequestParam("cno") Integer cno){
+		 universityImpl.unregisterStudent(rno,cno);
+		 return new ResponseEntity<>(HttpStatus.OK);
+	 }
+	
+	
 		 
 }

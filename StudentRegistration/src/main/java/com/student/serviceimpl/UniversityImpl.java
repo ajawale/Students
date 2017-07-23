@@ -80,5 +80,15 @@ public class UniversityImpl implements Univ {
 		}
 		studentDao.save(std);
 	}
+	
+	public void unregisterStudent(int rno, int cno) {
+		Student std = studentDao.findOne(rno);
+		if(std != null){
+			Set<Course> courseSet = new HashSet<>();
+			courseSet.add(courseDao.findOne(cno));
+			std.setCourses(courseSet);
+		}
+		studentDao.delete(std);
+	}
 
 }
