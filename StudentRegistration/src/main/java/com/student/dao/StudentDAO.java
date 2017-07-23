@@ -11,7 +11,7 @@ import com.student.models.Student;
 @Repository
 public interface StudentDAO extends CrudRepository<Student, Integer> {
 	
-	  // Hibernate Query Language
+	  // Native Query Language
 	@Modifying	
 	 @Query(value = "update STUDENT set CNO=?1 where RNO=?2", nativeQuery = true)
       public void updateStudent(@Param("CNO") Integer cno,@Param("RNO") Integer rno);
